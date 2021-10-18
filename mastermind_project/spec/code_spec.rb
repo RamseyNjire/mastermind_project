@@ -6,7 +6,7 @@ describe "Code" do
   let (:code) { Code.new(["R", "G", "R", "B"]) }
 
   describe "::POSSIBLE_PEGS" do
-    it "should be a hash containing letters containing letters as keys and colors as values" do
+    it "should be a hash containing letters as keys and colors as values" do
       expect(Code::POSSIBLE_PEGS).to eq ({"R"=>:red, "G"=>:green, "B"=>:blue,"Y"=>:yellow})
     end
   end

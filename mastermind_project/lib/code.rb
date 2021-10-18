@@ -6,4 +6,8 @@ class Code
     "Y" => :yellow
   }
 
+  def self.valid_pegs?(array)
+    array.all?{ |peg| POSSIBLE_PEGS.keys.include?(peg.upcase)} ? true : false
+  end
+
 end
