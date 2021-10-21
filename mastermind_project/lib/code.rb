@@ -15,6 +15,10 @@ class Code
     Code.new(Array.new(length){POSSIBLE_PEGS.keys.sample})
   end
 
+  def self.from_string(peg_string)
+    Code.new(peg_string.chars)
+  end
+
 
   def initialize(peg_array)
     raise "One or more of the characters is not a valid peg" unless Code.valid_pegs?(peg_array)
