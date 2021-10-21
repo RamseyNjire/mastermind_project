@@ -1,4 +1,5 @@
 class Code
+  attr_reader :pegs
   POSSIBLE_PEGS = {
     "R" => :red,
     "G" => :green,
