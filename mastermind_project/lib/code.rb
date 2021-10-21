@@ -11,6 +11,10 @@ class Code
     array.all?{ |peg| POSSIBLE_PEGS.keys.include?(peg.upcase)} ? true : false
   end
 
+  def self.random(length)
+    Code.new(Array.new(length){POSSIBLE_PEGS.keys.sample})
+  end
+
 
   def initialize(peg_array)
     raise "One or more of the characters is not a valid peg" unless Code.valid_pegs?(peg_array)
