@@ -28,4 +28,8 @@ class Code
   def [](index)
     @pegs[index]
   end
+
+  def length
+    @pegs.length
+  end
 end
