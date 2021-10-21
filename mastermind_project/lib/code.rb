@@ -24,4 +24,8 @@ class Code
     raise "One or more of the characters is not a valid peg" unless Code.valid_pegs?(peg_array)
     @pegs = peg_array.map!{ |peg| peg.upcase }
   end
+
+  def [](index)
+    @pegs[index]
+  end
 end
