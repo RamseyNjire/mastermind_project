@@ -32,4 +32,12 @@ class Code
   def length
     @pegs.length
   end
+
+  def num_exact_matches(code)
+    count = 0
+    code.pegs.each_with_index do |peg, index|
+      count += 1 if peg == self[index]
+    end
+    count
+  end
 end
