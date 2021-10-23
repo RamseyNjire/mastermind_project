@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Code
   attr_reader :pegs
   POSSIBLE_PEGS = {
@@ -35,9 +37,58 @@ class Code
 
   def num_exact_matches(code)
     count = 0
-    code.pegs.each_with_index do |peg, index|
-      count += 1 if peg == self[index]
-    end
+    code.pegs.each_with_index{ |peg, index| count += 1 if peg == self[index] }
     count
   end
+
+  def num_near_matches(code)
+    count = 0
+    duplicate_code = Marshal.load(Marshal.dump(code))
+    duplicate_self = Marshal.load(Marshal.dump(self))
+    failed_matches_code_array = []
+    failed_matches_self_array = []
+    count = 0
+    iteration_count = duplicate_code.length
+
+    # first let's remove all the exact matches and extract the non-matchers
+    # to separate arrays for further analysis.
+
+    while true
+      peg = duplicate_code.pegs.first
+      if peg == duplicate_self[0]
+        duplicate_code.pegs.delete_at(0)
+        duplicate_self.pegs.delete_at(0)
+      else
+        failed_matches_code_array << peg
+        failed_matches_self_array << duplicate_self[0]
+        duplicate_code.pegs.delete_at(0)
+        duplicate_self.pegs.delete_at(0)
+      end
+      iteration_count -= 1
+      break if iteration_count == 0
+    end
+
+    # Now that I have arrays of pegs that failed the exact_match test, I can test these
+    # for near matches
+
+    while true
+      peg = failed_matches_code_array.first
+      if failed_matches_self_array.include?(peg)
+        failed_matches_code_array.delete_at(0)
+        failed_matches_self_array.delete_at(failed_matches_self_array.find_index(peg))
+        count += 1
+      else
+        failed_matches_code_array.delete_at(0)
+        failed_matches_self_array.delete_at(0)
+      end
+      break if failed_matches_code_array.length == 0
+    end
+
+    count
+    
+  end
 end
+
+code = Code.new(%w(R G R B))
+
+code.num_near_matches(Code.new(%w(G R R R)))
