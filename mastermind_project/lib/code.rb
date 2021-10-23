@@ -87,8 +87,8 @@ class Code
     count
     
   end
+
+  def ==(code)
+    self.num_exact_matches(code) == code.length ? true : false
+  end
 end
-
-code = Code.new(%w(R G R B))
-
-code.num_near_matches(Code.new(%w(G R R R)))
