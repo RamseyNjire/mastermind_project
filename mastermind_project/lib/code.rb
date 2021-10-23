@@ -79,7 +79,7 @@ class Code
         count += 1
       else
         failed_matches_code_array.delete_at(0)
-        failed_matches_self_array.delete_at(0)
+        # failed_matches_self_array.delete_at(0)
       end
       break if failed_matches_code_array.length == 0
     end
@@ -92,3 +92,9 @@ class Code
     self.num_exact_matches(code) == code.length ? true : false
   end
 end
+
+# code = Code.new(%w(R G R B))
+
+# other_code = Code.new(%w(Y Y Y G))
+
+# p code.num_near_matches(other_code)
