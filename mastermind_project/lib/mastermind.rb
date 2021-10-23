@@ -12,15 +12,16 @@ class Mastermind
         puts "#{@secret_code.num_near_matches(code)}"
     end
 
+    def ask_user_for_guess
+        puts "Enter a code: "
+        peg_string = gets.chomp
+
+        guessed_code = Code.from_string(peg_string)
+
+        print_matches(guessed_code)
+
+        @secret_code == guessed_code
+    end
+
 end
-
-# mastermind = Mastermind.new(4)
-
-# mastermind.secret_code = (Code.new(["R", "G", "R", "B"]))
-
-# code_1 = Code.new(["R", "Y", "Y", "B"])
-
-# code_2 = Code.new(["Y", "Y", "Y", "G"])
-
-# p mastermind.print_matches(code_1)
 

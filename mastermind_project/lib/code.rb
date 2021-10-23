@@ -92,9 +92,3 @@ class Code
     self.num_exact_matches(code) == code.length ? true : false
   end
 end
-
-# code = Code.new(%w(R G R B))
-
-# other_code = Code.new(%w(Y Y Y G))
-
-# p code.num_near_matches(other_code)
